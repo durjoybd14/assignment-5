@@ -1,4 +1,4 @@
-// main body part
+// main part
 document.getElementById('search-button').addEventListener('click', () => {
     const searchItem = document.getElementById('search-item').value;
     const foodContainer = document.getElementById('food-container');
@@ -13,12 +13,12 @@ document.getElementById('search-button').addEventListener('click', () => {
 
                     mainContent += `
                     <div class = "meal-item" >
-                        <div class = "meal" id="details" onclick="mealDetails('${meal.strMeal}')">
+                        <div class = "meal" onclick="mealDetails('${meal.strMeal}')">
                             <img src = "${meal.strMealThumb}" alt = "">
                             <h3>${meal.strMeal}</h3>
                         </div>
                     </div>
-                `;
+                    `;
 
                 });
 
@@ -45,29 +45,29 @@ const mealDetails = name => {
         .then(data => {
 
             const mealInfo = `
-            <img src = "${data.meals[0].strMealThumb}" alt = "">
-            <h1>Name: ${data.meals[0].strMeal}</h1>
-            <h4>Ingredients are: </h4>
-            
-            <ul>
-            <li>${data.meals[0].strIngredient1}</li>
-            <li>${data.meals[0].strIngredient2}</li>
-            <li>${data.meals[0].strIngredient3}</li>
-            <li>${data.meals[0].strIngredient4}</li>
-            <li>${data.meals[0].strIngredient5}</li>
-            <li>${data.meals[0].strIngredient6}</li>
-            <li>${data.meals[0].strIngredient7}</li>
-            <li>${data.meals[0].strIngredient8}</li>
-            <li>${data.meals[0].strIngredient9}</li>
-            <li>${data.meals[0].strIngredient10}</li>
-            <li>${data.meals[0].strIngredient11}</li>
-            <li>${data.meals[0].strIngredient12}</li>
-            <li>${data.meals[0].strIngredient13}</li>
-            <li>${data.meals[0].strIngredient14}</li>
+        <img src = "${data.meals[0].strMealThumb}" alt = "">
+        <h1>Name: ${data.meals[0].strMeal}</h1>
+        <h4>Ingredients are: </h4>
+        
+        <ul>
+        <li>${data.meals[0].strIngredient1}</li>
+        <li>${data.meals[0].strIngredient2}</li>
+        <li>${data.meals[0].strIngredient3}</li>
+        <li>${data.meals[0].strIngredient4}</li>
+        <li>${data.meals[0].strIngredient5}</li>
+        <li>${data.meals[0].strIngredient6}</li>
+        <li>${data.meals[0].strIngredient7}</li>
+        <li>${data.meals[0].strIngredient8}</li>
+        <li>${data.meals[0].strIngredient9}</li>
+        <li>${data.meals[0].strIngredient10}</li>
+        <li>${data.meals[0].strIngredient11}</li>
+        <li>${data.meals[0].strIngredient12}</li>
+        <li>${data.meals[0].strIngredient13}</li>
+        <li>${data.meals[0].strIngredient14}</li>
         </ul>
-            
-            
-            `
+        
+        
+        `
             ingredient.innerHTML = mealInfo;
 
         });
