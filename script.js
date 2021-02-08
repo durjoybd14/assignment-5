@@ -31,7 +31,9 @@ document.getElementById('search-button').addEventListener('click', () => {
             }
 
             foodContainer.innerHTML = mainContent;
-        });
+        })
+        .catch(err => errorMessage('Sorry for this temporary problem, please try again later!'));
+
 
 });
 
@@ -40,7 +42,7 @@ document.getElementById('search-button').addEventListener('click', () => {
 const mealDetails = name => {
     const ingredient = document.getElementById('ingredient');
 
-    fetch(`https://www.themealdb.com/api/json/v1/1/search.php?s=${name}`)
+    fetch(`https://www.themealdb.com/apis/json/v1/1/search.php?s=${name}`)
         .then(res => res.json())
         .then(data => {
 
@@ -70,6 +72,14 @@ const mealDetails = name => {
         `
             ingredient.innerHTML = mealInfo;
 
-        });
+        })
+        .catch(err => errorMessage('Something wrong, please try again later to know about ingredients!'));
 
+
+}
+
+
+
+const errorMessage = error => {
+    document.getElementById('error-message').innerText = error;
 }
