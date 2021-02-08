@@ -1,4 +1,4 @@
-// main part
+// Food Container Part
 document.getElementById('search-button').addEventListener('click', () => {
     const searchItem = document.getElementById('search-item').value;
     const foodContainer = document.getElementById('food-container');
@@ -7,11 +7,11 @@ document.getElementById('search-button').addEventListener('click', () => {
     fetch(`https://www.themealdb.com/api/json/v1/1/search.php?s=${searchItem}`)
         .then(res => res.json())
         .then(data => {
-            let mainContent = "";
+            let foodContent = "";
             if (data.meals) {
                 data.meals.forEach(meal => {
 
-                    mainContent += `
+                    foodContent += `
                     <div class = "meal-item" >
                         <div class = "meal" onclick="mealDetails('${meal.strMeal}')">
                             <img src = "${meal.strMealThumb}" alt = "">
@@ -25,61 +25,62 @@ document.getElementById('search-button').addEventListener('click', () => {
             }
 
             else {
-                mainContent = ` <h1>&#9785; Sorry, we didn't find any meal that you search</h1> 
+                foodContent = ` <h1> &#9785; Sorry, we didn't find any meal that you search</h1> 
                 
                 `;
             }
 
-            foodContainer.innerHTML = mainContent;
+            foodContainer.innerHTML = foodContent;
         })
-        .catch(err => errorMessage('Sorry for this temporary problem, please try again later!'));
 
+        .catch(error => errorMessage('Sorry for this temporary problem, please try again later!'));
 
 });
 
 
-// details generate part
+// Ingredient Generate Part
 const mealDetails = name => {
-    const ingredient = document.getElementById('ingredient');
+    const ingredientDiv = document.getElementById('ingredient-div');
 
-    fetch(`https://www.themealdb.com/apis/json/v1/1/search.php?s=${name}`)
+    fetch(`https://www.themealdb.com/api/json/v1/1/search.php?s=${name}`)
         .then(res => res.json())
         .then(data => {
 
             const mealInfo = `
-        <img src = "${data.meals[0].strMealThumb}" alt = "">
-        <h1>Name: ${data.meals[0].strMeal}</h1>
-        <h4>Ingredients are: </h4>
+            <img src="${data.meals[0].strMealThumb}" alt="">
+            <h1>Name: ${data.meals[0].strMeal}</h1>
+            <h4>Ingredients are: </h4>
         
-        <ul>
-        <li>${data.meals[0].strIngredient1}</li>
-        <li>${data.meals[0].strIngredient2}</li>
-        <li>${data.meals[0].strIngredient3}</li>
-        <li>${data.meals[0].strIngredient4}</li>
-        <li>${data.meals[0].strIngredient5}</li>
-        <li>${data.meals[0].strIngredient6}</li>
-        <li>${data.meals[0].strIngredient7}</li>
-        <li>${data.meals[0].strIngredient8}</li>
-        <li>${data.meals[0].strIngredient9}</li>
-        <li>${data.meals[0].strIngredient10}</li>
-        <li>${data.meals[0].strIngredient11}</li>
-        <li>${data.meals[0].strIngredient12}</li>
-        <li>${data.meals[0].strIngredient13}</li>
-        <li>${data.meals[0].strIngredient14}</li>
-        </ul>
+            <ul>
+                <li>${data.meals[0].strIngredient1}</li>
+                <li>${data.meals[0].strIngredient2}</li>
+                <li>${data.meals[0].strIngredient3}</li>
+                <li>${data.meals[0].strIngredient4}</li>
+                <li>${data.meals[0].strIngredient5}</li>
+                <li>${data.meals[0].strIngredient6}</li>
+                <li>${data.meals[0].strIngredient7}</li>
+                <li>${data.meals[0].strIngredient8}</li>
+                <li>${data.meals[0].strIngredient9}</li>
+                <li>${data.meals[0].strIngredient10}</li>
+                <li>${data.meals[0].strIngredient11}</li>
+                <li>${data.meals[0].strIngredient12}</li>
+                <li>${data.meals[0].strIngredient13}</li>
+                <li>${data.meals[0].strIngredient14}</li>
+            </ul>
         
         
         `
-            ingredient.innerHTML = mealInfo;
+            ingredientDiv.innerHTML = mealInfo;
 
         })
-        .catch(err => errorMessage('Something wrong, please try again later to know about ingredients!'));
+
+        .catch(error => errorMessage('Something wrong, please try again later to know about ingredients!'));
 
 
 }
 
 
-
+// Error Message Part
 const errorMessage = error => {
     document.getElementById('error-message').innerText = error;
 }
