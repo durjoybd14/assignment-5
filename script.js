@@ -1,6 +1,15 @@
 // Food Container Part
 document.getElementById('search-button').addEventListener('click', () => {
     const searchItem = document.getElementById('search-item').value;
+    if (searchItem === "") {
+        alert("Search filed is required");
+    }
+
+    foodContainer();
+});
+
+const foodContainer = () => {
+    const searchItem = document.getElementById('search-item').value;
     const foodContainer = document.getElementById('food-container');
     document.getElementById('search-item').value = "";
 
@@ -8,6 +17,7 @@ document.getElementById('search-button').addEventListener('click', () => {
         .then(res => res.json())
         .then(data => {
             let foodContent = "";
+
             if (data.meals) {
                 data.meals.forEach(meal => {
 
@@ -35,8 +45,7 @@ document.getElementById('search-button').addEventListener('click', () => {
 
         .catch(error => errorMessage('Sorry for this temporary problem, please try again later!'));
 
-});
-
+}
 
 // Ingredient Generate Part
 const mealDetails = name => {
